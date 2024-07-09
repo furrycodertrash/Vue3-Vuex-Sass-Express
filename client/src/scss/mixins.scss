@@ -1,3 +1,4 @@
+@import 'variables';
 @mixin flex($direction: row, $justify: flex-start, $align: flex-start) {
   display: flex;
   flex-direction: $direction;
@@ -12,4 +13,104 @@
 }
 @mixin flexCenterRow {
   @include flexCenter(row);
+}
+@mixin neonText($text-color: #b10dc9, $glow-color: rgba(177, 13, 201, 0.7), $glow-radius: 5px) {
+  color: $text-color;
+  text-shadow: 0 0 $glow-radius $glow-color;
+}
+@mixin neonBorder($border-color: #b10dc9, $glow-color: rgba(177, 13, 201, 0.7), $glow-radius: 5px) {
+  border: 1px solid $border-color;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+    z-index: -1;
+    text-shadow: 0 0 $glow-radius $glow-color;
+  }
+
+  &:hover::before {
+    opacity: 0.9;
+  }
+}
+@mixin mainButton {
+  @include flexCenter();
+  height: 1.5em;
+  width: auto;
+  padding: 1em 1em;
+  border-radius: 5px;
+  border: none;
+  background-color: $KirjaPink;
+  color: $KirjaCream;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: $KirjaCream;
+    color: $KirjaPink;
+  }
+  &:disabled {
+    background-color: $KirjaOffWhite;
+    color: $KirjaCream;
+  }
+}
+@mixin formInput {
+  width: 80%;
+  height: 2em;
+  margin: 10px;
+  padding: 10px;
+  border-radius: $KirjaRoundedEdges;
+  border: 1px solid $KirjaBorder;
+  &:focus {
+    outline: none;
+    border: 1px solid $KirjaPink;
+ }
+}
+@mixin mainForm {
+  width: 100%;
+  height: 100%;
+  @include flexCenterColumn;
+  gap: 1em;
+  .input-box {
+    width: 100%;
+    label {
+      font-size: 0.75em;
+    }
+    input {
+      width: 100%;
+      height: 2em;
+      font-size: 1em;
+      padding: 0.5em;
+      border-radius: $KirjaRoundedEdges;
+      border: 1px solid $KirjaBorder;
+      background-color: $KirjaSmoke;
+      color: $KirjaWhite;
+      caret-color: $KirjaWhite;
+      &:focus {
+        outline: none;
+        border: 1px solid $KirjaPink;
+      }
+    }
+  }
+}
+@mixin mainTextarea {
+  width: 100%;
+  height: 100%;
+  padding: 0.5em;
+  font-size: 1rem;
+  border: 1px solid $KirjaBorder;
+  border-radius: $KirjaRoundedEdges;
+  margin-bottom: 1em;
+  box-sizing: border-box;
+  resize: none;
+  min-height: 100px;
+  background-color: $KirjaSmoke;
+  color: $KirjaCream;
+  &:focus {
+    outline: none;
+    border: 1px solid $KirjaPink;
+  }
 }
